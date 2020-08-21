@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MovieCustomerMvcAppWithAuthentication.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customer List</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Discount Rate</th>
+            <th>Date of Birth</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(customer.Name, "Index", "Customers", new { id = customer.Id },null)</td>
+                <td>@customer.MembershipType.DiscountRate%</td>
+                <td>@customer.DateOfBirth</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* by default EF loads only the data of the model class which is referred above
+
+    Eager Loading- when we add reference from other model class also in the same view
+    So we added Include(c=>c.MembershipType) in the controller. *@
